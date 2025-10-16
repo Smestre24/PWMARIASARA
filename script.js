@@ -1,19 +1,22 @@
 /* script.js - Lista de Tarefas Interativa (implementado) */
-/* Preencha seu nome, turma e data se for atividade escolar */
+/*Alunas: Maria Isabeli Antunes Medeiros e Sara Silva Mestre */
+/*Turma: 3 ano B */
+
+/* variaveis globais */
 let tasks = [];
 let currentFilter = 'todas';
 let searchTerm = '';
 let editingTaskId = null;
 
+/* inicialização */
 document.addEventListener('DOMContentLoaded', () => {
     loadTasks();
     setupEventListeners();
-    // se não houver tarefas, adiciona exemplos
     if (!tasks || tasks.length === 0) addExampleTasks();
     renderTasks();
 });
 
-/* ---------- Event listeners ---------- */
+/* Event listeners */
 function setupEventListeners() {
     const addBtn = document.getElementById('addTaskBtn');
     const taskInput = document.getElementById('taskInput');
@@ -62,7 +65,7 @@ function setupEventListeners() {
     });
 }
 
-/* ---------- CRUD & ações ---------- */
+/* CRUD & ações  */
 function addTask() {
     const taskInput = document.getElementById('taskInput');
     const prioritySelect = document.getElementById('prioritySelect');
@@ -103,7 +106,7 @@ function toggleTask(id) {
 
 function deleteTask(id) {
     if (!confirm('Tem certeza que deseja excluir esta tarefa?')) return;
-    // animação: adiciona classe removing brevemente (opcional)
+    // animação
     const idx = tasks.findIndex(t => t.id === id);
     if (idx === -1) return;
     tasks.splice(idx, 1);
@@ -148,7 +151,7 @@ function closeModal() {
     editingTaskId = null;
 }
 
-/* limpar concluídas */
+/* limpar as que estão concluídas */
 function clearCompleted() {
     const completedCount = tasks.filter(t => t.completed).length;
     if (completedCount === 0) { showNotification('Não há tarefas concluídas para remover!', 'info'); return; }
@@ -169,7 +172,7 @@ function clearAll() {
     showNotification('Todas as tarefas foram removidas!', 'success');
 }
 
-/* ---------- renderização ---------- */
+/*  renderização  */
 function renderTasks() {
     const taskList = document.getElementById('taskList');
     const emptyState = document.getElementById('emptyState');
@@ -241,7 +244,7 @@ function createTaskElement(task) {
     actions.appendChild(editBtn);
     actions.appendChild(deleteBtn);
 
-    // montar li
+    // montar o li
     li.appendChild(left);
     li.appendChild(meta);
     li.appendChild(actions);
@@ -266,7 +269,7 @@ function getFilteredTasks() {
             filtered = filtered.filter(t => t.priority === currentFilter);
             break;
         default:
-            // 'todas' - sem filtro
+            // 'todas' 
             break;
     }
 
@@ -288,7 +291,7 @@ function updateStats() {
     document.getElementById('pendingTasks').textContent = `Pendentes: ${pending}`;
 }
 
-/* ---------- persistência ---------- */
+/*  persistência  */
 function saveTasks() {
     try {
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -308,7 +311,7 @@ function loadTasks() {
     }
 }
 
-/* ---------- utilitários ---------- */
+/*  utilitários  */
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -320,7 +323,7 @@ function showNotification(message, type = 'info') {
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
 
-    // estilo inline (rápido)
+    // estilo inline 
     notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -360,4 +363,4 @@ function addExampleTasks() {
     saveTasks();
 }
 
-/* fim do arquivo */
+
