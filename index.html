@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Lista de Tarefas Interativa - ATIVIDADE</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-tasks"></i> Minha Lista de Tarefas</h1>
+            <p class="subtitle">Organize suas atividades de forma eficiente</p>
+        </header>
+
+        <!-- entrada -->
+        <div class="task-input-section">
+            <div class="input-group">
+                <input type="text" id="taskInput" placeholder="Digite uma nova tarefa..." maxlength="100" aria-label="Nova tarefa">
+                <select id="prioritySelect" aria-label="Prioridade">
+                    <option value="baixa">Baixa</option>
+                    <option value="media" selected>Média</option>
+                    <option value="alta">Alta</option>
+                </select>
+                <button id="addTaskBtn" title="Adicionar tarefa"><i class="fas fa-plus"></i> Adicionar</button>
+            </div>
+        </div>
+
+        <!-- controles -->
+        <div class="controls">
+            <div class="filter-section">
+                <label for="filterSelect">Filtrar por:</label>
+                <select id="filterSelect" aria-label="Filtro de tarefas">
+                    <option value="todas">Todas</option>
+                    <option value="pendentes">Pendentes</option>
+                    <option value="concluidas">Concluídas</option>
+                    <option value="alta">Prioridade Alta</option>
+                    <option value="media">Prioridade Média</option>
+                    <option value="baixa">Prioridade Baixa</option>
+                </select>
+            </div>
+
+            <div class="search-section">
+                <input type="text" id="searchInput" placeholder="Buscar tarefas..." aria-label="Buscar tarefas">
+                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+            </div>
+
+            <div class="stats">
+                <span id="totalTasks">Total: 0</span>
+                <span id="completedTasks">Concluídas: 0</span>
+                <span id="pendingTasks">Pendentes: 0</span>
+            </div>
+        </div>
+
+        <!-- lista -->
+        <div class="task-list-container">
+            <ul id="taskList" class="task-list" aria-live="polite"></ul>
+
+            <div id="emptyState" class="empty-state" aria-hidden="true">
+                <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+                <h3>Nenhuma tarefa encontrada</h3>
+                <p>Adicione uma nova tarefa para começar!</p>
+            </div>
+        </div>
+
+        <!-- ações em lote -->
+        <div class="actions">
+            <button id="clearCompletedBtn" class="btn-secondary"><i class="fas fa-trash"></i> Limpar Concluídas</button>
+            <button id="clearAllBtn" class="btn-danger"><i class="fas fa-trash-alt"></i> Limpar Todas</button>
+        </div>
+    </div>
+
+    <!-- modal edição -->
+    <div id="editModal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <h3 id="modalTitle">Editar Tarefa</h3>
+                <span class="close" title="Fechar">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="editTaskInput" placeholder="Texto da tarefa" maxlength="100" aria-label="Texto da tarefa">
+                <select id="editPrioritySelect" aria-label="Prioridade da tarefa">
+                    <option value="baixa">Baixa</option>
+                    <option value="media">Média</option>
+                    <option value="alta">Alta</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button id="saveEditBtn" class="btn-primary">Salvar</button>
+                <button id="cancelEditBtn" class="btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
